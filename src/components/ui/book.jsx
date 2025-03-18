@@ -16,7 +16,7 @@ const Book = ({ book }) => {
       </div>
       <div className="book__ratings">
         {
-          new Array(Matyh.floor(book.rating)).fill(0).map((_, index) => <FontAwesomeIcon icon="star" key={index} />)
+          new Array(Math.floor(book.rating)).fill(0).map((_, index) => <FontAwesomeIcon icon="star" key={index} />)
         }
         {
           !Number.isInteger(book.rating) && <FontAwesomeIcon icon="star-half-alt" />

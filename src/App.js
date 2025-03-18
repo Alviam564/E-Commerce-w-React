@@ -13,6 +13,7 @@ function App() {
       <Highlights />
       <Featured />
       <Discounted />
+      <Expolore />
     </div>
   );
 }
