@@ -2,7 +2,7 @@ import React from "react"
 import Book from "./ui/book"
 import { books } from '../data'
 
-const Features = () => {
+const Featured = () => {
     console.log(books)
     return (
       <section id="features">
@@ -26,4 +26,4 @@ const Features = () => {
     )
   }
   
-  export default Features 
+export default Featured 

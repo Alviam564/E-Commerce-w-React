@@ -1,29 +1,24 @@
-import Landing from "./components/Landing.jsx";
 import Nav from "./components/Nav.jsx";
-import Highlights from "./components/Highlights.jsx";
 import React from 'react'
-import Featured from "./components/Featured.jsx"
-import Discounted from "./components/Discounted.jsx";
+import Footer from "./components/Footer.jsx";
+import Home from "./pages/Home.jsx"
+import Books from "./pages/Books";
+import { books } from "./data";
+import Bookinfo from "./pages/Bookinfo.jsx";
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Nav />
-      <Landing />
-      <Highlights />
-      <Featured />
-      <Discounted />
-      <Expolore />
-    </div>
+    <Router> 
+      <div className="App">
+          <Nav />
+          <Route path='/' exact component={Home} />
+          <Route path='/books' exact render={() => <Books books={books} />} />
+          <Route path='/books/1' render={() => <Bookinfo books={books} />} />
+          <Footer />
+      </div>
+    </Router>
   );
 }
-
-/*const Highlights = () => {
-  return (
-    <div>Highlights</div>
-  )
-}
-
-export default Highlights */
 
 export default App;
