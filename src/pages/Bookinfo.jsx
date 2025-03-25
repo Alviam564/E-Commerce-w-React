@@ -1,14 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState }from "react";
 import { Link, useParams } from "react-router-dom";
 import Rating from "../components/ui/Rating";
 import Price from "../components/ui/Price";
 import Book from "../components/ui/book";
 
-const Bookinfo = ({ books }) => {
+const Bookinfo = ({ books, addToCart, cart }) => {
   const { id } = useParams()
-  const book = books.find(book => +book.id === +id)
+  const book = books.find((book) => +book.id === +id)
+
+  if (!book) return <p>Book not found.</p>;
+
+  function addBookToCart(book) {
+    addToCart(book)
+  }
   
+  function isbookinCart() {
+    return cart.find((book) => book.id === +id);
+  }
   return (
     <div id="books__body">
       <main id="books__main">
@@ -27,16 +36,16 @@ const Bookinfo = ({ books }) => {
                 <img
                   src={book.url}
                   alt=""
-                  className="book__selected--ig"
+                  className="book__selected--img"
                 />
               </figure>
               <div className="book_selected--decription">
-                <h2 className="book__selected--title">
-                  {book.title}
-                </h2>
+                <h2 className="book__selected--title"> {book.title} </h2>
                 <Rating rating={book.rating} />
                 <div className="book__selected--price">
-                  <Price originalPrice={book.originalPrice} salePrice={book.salePrice} />
+                  <Price
+                    originalPrice={book.originalPrice} 
+                    salePrice={book.salePrice} />
                 </div>
                 <div className="book__summary">
                   <h3 className="book__summary--title">Summary</h3>
@@ -52,22 +61,27 @@ const Bookinfo = ({ books }) => {
                     incidunt dolores, eaque ipsa ipsam doloribus fugiat?
                     Molestias, consectetur. Error, dolores nemo!
                   </p>
-                  <div>
-                    <button className="btn">
-                      Add to Cart
-                    </button>
-                  </div>
                 </div>
+                {isbookinCart() ? (
+                    <button className="btn">
+                      Checkout
+                    </button>
+                ) : (
+                  <button className="btn" onClick={() => addBookToCart(book)}>
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
+
         <div className="book__container">
           <div className="row">
             <div className="book__selected--top">
               <h2 className="book__selected--top">
                 Recommanded Books
-                </h2>
+              </h2>
             </div>
             <div className="books">
               {books
