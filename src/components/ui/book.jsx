@@ -11,7 +11,7 @@ const Book = ({ book }) => {
   useEffect(() => {
     const image = new Image()
     image.src = book.url;
-    img.onload = () => {
+    image.onload = () => {
       setTimeout(() => {
         if (mountedRef.current) {
         setImg(image)
